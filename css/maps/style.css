@@ -12,7 +12,7 @@ main {
 
 header {
   background-image: url("../../assets/img/background.jpeg");
-  background-color: black;
+  background-color: #1B1B1B;
   height: 667px;
   background-size: cover;
   background-position: center;
@@ -109,39 +109,44 @@ header .form-control {
   border: none;
   text-decoration: none;
   margin-bottom: 66px;
+  height: 45.688rem;
+}
+.cards .card-body {
+  padding: 32px 25px;
 }
 .cards .card img {
   object-fit: cover;
 }
-.cards .card .card-body {
-  padding: 32px 25px;
-}
-.cards .card .card-body h2 {
+.cards .card h2 {
   font-family: "Anton", sans-serif;
   font-weight: 400;
   font-style: normal;
   font-size: 1.125rem;
   margin-bottom: 29px;
 }
-.cards .card .card-body h3 {
+.cards .card h3 {
   font-weight: 500;
   font-size: 0.75rem;
   color: #7A7A7A;
   margin-bottom: 15px;
 }
-.cards .card .card-body .card-text {
+.cards .card-text {
   margin-bottom: 32px;
+  overflow: hidden;
+  max-height: 6em;
 }
-.cards .card .card-body .card-ingredients {
+.cards .card-ingredients {
   display: grid;
-}
-.cards .card .card-body .card-ingredients .card-details {
+  grid-template-columns: 1fr 1fr;
   gap: 0px;
 }
-.cards .card .card-body .card-ingredients .card-text-ingredient {
+.cards .card-ingredients-details {
+  gap: 0px;
+}
+.cards .card-text-ingredient {
   margin-bottom: 0px;
 }
-.cards .card .card-body .card-ingredients .card-text-qty {
+.cards .card-text-qty {
   color: #7A7A7A;
   margin-bottom: 21px;
 }/*# sourceMappingURL=style.css.map */

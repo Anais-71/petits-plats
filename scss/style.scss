@@ -17,7 +17,7 @@ $bkground: #EDEDED;
 }
 
 body {
-    @include font-main();
+    @include font-main;
 }
 
 main {
@@ -27,24 +27,22 @@ main {
 
 header {
     background-image: url("../../assets/img/background.jpeg");
-    background-color: black;
+    background-color: $black;
     height: 667px;
     background-size: cover;
     background-position: center;
 
-    .navbar-brand {
-        img {
-            position: relative;
-            width: 207px;
-            height: 25.261px;
-            top: 51px;
-            left: 69px;
-        }
+    .navbar-brand img {
+        position: relative;
+        width: 207px;
+        height: 25.261px;
+        top: 51px;
+        left: 69px;
     }
 
     h1 {
         color: $main;
-        @include font-sec();
+        @include font-sec;
         font-size: 2.75rem;
         position: relative;
         top: 225px;
@@ -63,31 +61,31 @@ header {
         }
 
         &-text {
-                background-color: $black;
-                border-radius: 10px;
-                width: 51px;
-                height: 51px;
-                border: none;
-                position: absolute;
-                right: 3px;
-                top: 3px;
+            background-color: $black;
+            border-radius: 10px;
+            width: 51px;
+            height: 51px;
+            border: none;
+            position: absolute;
+            right: 3px;
+            top: 3px;
 
-                .bi.bi-search {
-                    background-color: white !important;
-                } 
-
+            .bi.bi-search {
+                background-color: white !important;
             }
+
+        }
     }
 
     input::placeholder {
         color: $grey;
-        @include font-main();
+        @include font-main;
         font-size: 1rem;
     }
 
     .form-control {
         border-radius: 11px !important;
-        }
+    }
 }
 
 .filter {
@@ -103,23 +101,23 @@ header {
 
         .dropdown {
 
-            .btn{
-            background-color: white;
-            width: 156px;
-            padding: 17px 16px;
-            font-size: 1rem;
-            font-weight: 400;
-            color: $black;
-            border: none;
-            line-height: 0px;
+            .btn {
+                background-color: white;
+                width: 156px;
+                padding: 17px 16px;
+                font-size: 1rem;
+                font-weight: 400;
+                color: $black;
+                border: none;
+                line-height: 0px;
             }
         }
     }
 
     .count {
         p {
-        @include font-sec();
-        font-size: 1.313rem;
+            @include font-sec;
+            font-size: 1.313rem;
         }
     }
 }
@@ -136,46 +134,52 @@ header {
         border: none;
         text-decoration: none;
         margin-bottom: 66px;
-    
+        height: 45.688rem;
+
+        &-body {
+            padding: 32px 25px;
+        }
+        
         img {
-        object-fit: cover;
-    }
-
-    .card-body {
-        padding: 32px 25px;
-
-    h2 {
-        @include font-sec();
-        font-size: 1.125rem;
-        margin-bottom: 29px;
-    }
-
-    h3 {
-        font-weight: 500;
-        font-size: 0.75rem;
-        color: $grey;
-        margin-bottom: 15px;
-    }
-
-    .card-text {
-        margin-bottom: 32px;
-    }
-
-    .card-ingredients {
-        display: grid; 
-        .card-details {
-            gap: 0px;
+            object-fit: cover;
         }
 
-        .card-text-ingredient {
+        h2 {
+            @include font-sec;
+            font-size: 1.125rem;
+            margin-bottom: 29px;
+        }
+
+        h3 {
+            font-weight: 500;
+            font-size: 0.75rem;
+            color: $grey;
+            margin-bottom: 15px;
+        }
+
+        &-text {
+            margin-bottom: 32px;
+            overflow: hidden;
+            max-height: 6em;
+        }
+
+        &-ingredients {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0px;
+
+            &-details {
+                gap: 0px;
+            }
+        }
+
+        &-text-ingredient {
             margin-bottom: 0px;
         }
 
-        .card-text-qty {
+        &-text-qty {
             color: $grey;
             margin-bottom: 21px;
         }
     }
-}
-}
 }
