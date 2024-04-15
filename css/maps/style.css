@@ -1,6 +1,5 @@
 body {
   font-family: "Manrope", sans-serif;
-  font-optical-sizing: auto;
   font-weight: 400;
   font-style: normal;
 }
@@ -54,13 +53,9 @@ header .input-group-text {
   right: 3px;
   top: 3px;
 }
-header .input-group-text .bi.bi-search {
-  background-color: white !important;
-}
 header input::placeholder {
   color: #7A7A7A;
   font-family: "Manrope", sans-serif;
-  font-optical-sizing: auto;
   font-weight: 400;
   font-style: normal;
   font-size: 1rem;
@@ -80,17 +75,57 @@ header .form-control {
   justify-content: flex-start;
   gap: 65px;
 }
-.filter .dropdown-section .dropdown .btn {
-  background-color: white;
+.filter .dropdown-section .input-group-text {
+  background-color: transparent;
+  border: none;
+  position: relative;
+  top: 5px;
+}
+.filter .dropdown-menu {
+  border: none;
   width: 156px;
+  height: 215px;
+  border-top-right-radius: 0px;
+  border-top-left-radius: 0px;
+  font-size: 0.875rem;
+  font-weight: 400;
+  color: #1B1B1B;
+  padding: 16px 0px 16px;
+  overflow: auto;
+}
+.filter .input-group {
+  width: 124px;
+  border-radius: 2px;
+  border: solid 1px #C6C6C6;
+}
+.filter .form-control {
+  border: none;
+}
+.filter .dropdown-item:hover {
+  background-color: #FFD15B;
+}
+.filter .btn {
+  display: flex;
+  justify-content: space-between;
+  background-color: white;
+  width: 160px;
   padding: 17px 16px;
   font-size: 1rem;
-  font-weight: 400;
+  font-weight: 500;
   color: #1B1B1B;
   border: none;
   line-height: 0px;
 }
-.filter .count p {
+.filter .btn-check:checked + .btn, .filter .btn.active, .filter .btn.show, .filter .btn:first-child:active, .filter :not(.btn-check) + .btn:active, .filter .btn:hover {
+  color: #1B1B1B;
+  background-color: white;
+}
+
+.dropdown-menu .show {
+  inset: -5px auto auto 0px;
+}
+
+.count {
   font-family: "Anton", sans-serif;
   font-weight: 400;
   font-style: normal;
@@ -100,7 +135,7 @@ header .form-control {
 .cards {
   margin-top: 55px;
   font-size: 0.875rem;
-  gap: 49px;
+  gap: 48px;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;

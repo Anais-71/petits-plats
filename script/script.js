@@ -15,6 +15,7 @@ async function displayData(recipes) {
         const userCardDOM = recipeModel.getRecipeDOM();
         recipeSection.appendChild(userCardDOM);
     });
+    recipesCount()
 }
 
 async function init() {
@@ -24,3 +25,10 @@ async function init() {
 }
 
 init();
+
+// Recipes count
+function recipesCount() {
+    var recipes = document.querySelectorAll(".card");
+    var countElement = document.getElementById("count");
+    countElement.textContent = recipes.length + " recettes";
+}

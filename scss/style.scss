@@ -1,185 +1,222 @@
 $main: #FFD15B;
 $grey: #7A7A7A;
+$light-grey: #C6C6C6;
 $black: #1B1B1B;
 $bkground: #EDEDED;
 
 @mixin font-main {
-    font-family: "Manrope", sans-serif;
-    font-optical-sizing: auto;
-    font-weight: 400;
-    font-style: normal;
+  font-family: "Manrope", sans-serif;
+  font-weight: 400;
+  font-style: normal;
 }
 
 @mixin font-sec {
-    font-family: "Anton", sans-serif;
-    font-weight: 400;
-    font-style: normal;
+  font-family: "Anton", sans-serif;
+  font-weight: 400;
+  font-style: normal;
 }
 
 body {
-    @include font-main;
+  @include font-main;
 }
 
 main {
-    padding: 21px 102px 201px 102px;
-    background-color: $bkground;
+  padding: 21px 102px 201px 102px;
+  background-color: $bkground;
 }
 
 header {
-    background-image: url("../../assets/img/background.jpeg");
-    background-color: $black;
-    height: 667px;
-    background-size: cover;
-    background-position: center;
+  background-image: url("../../assets/img/background.jpeg");
+  background-color: $black;
+  height: 667px;
+  background-size: cover;
+  background-position: center;
 
-    .navbar-brand img {
-        position: relative;
-        width: 207px;
-        height: 25.261px;
-        top: 51px;
-        left: 69px;
+  .navbar-brand img {
+    position: relative;
+    width: 207px;
+    height: 25.261px;
+    top: 51px;
+    left: 69px;
+  }
+
+  h1 {
+    color: $main;
+    @include font-sec;
+    font-size: 2.75rem;
+    position: relative;
+    top: 225px;
+    line-height: 70px;
+  }
+
+  .input-group {
+    width: 954px;
+    height: 57px;
+    position: relative;
+    top: 247px;
+
+    &-append {
+      display: flex;
+      align-items: center;
     }
 
-    h1 {
-        color: $main;
-        @include font-sec;
-        font-size: 2.75rem;
-        position: relative;
-        top: 225px;
-        line-height: 70px;
+    &-text {
+      background-color: $black;
+      border-radius: 10px;
+      width: 51px;
+      height: 51px;
+      border: none;
+      position: absolute;
+      right: 3px;
+      top: 3px;
+
+      
     }
+  }
 
-    .input-group {
-        width: 954px;
-        height: 57px;
-        position: relative;
-        top: 247px;
+  input::placeholder {
+    color: $grey;
+    @include font-main;
+    font-size: 1rem;
+  }
 
-        &-append {
-            display: flex;
-            align-items: center;
-        }
-
-        &-text {
-            background-color: $black;
-            border-radius: 10px;
-            width: 51px;
-            height: 51px;
-            border: none;
-            position: absolute;
-            right: 3px;
-            top: 3px;
-
-            .bi.bi-search {
-                background-color: white !important;
-            }
-
-        }
-    }
-
-    input::placeholder {
-        color: $grey;
-        @include font-main;
-        font-size: 1rem;
-    }
-
-    .form-control {
-        border-radius: 11px !important;
-    }
+  .form-control {
+    border-radius: 11px !important;
+  }
 }
 
 .filter {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  .dropdown-section {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: flex-start;
+    gap: 65px;
 
-    .dropdown-section {
-        display: flex;
-        flex-direction: row;
-        justify-content: flex-start;
-        gap: 65px;
-
-        .dropdown {
-
-            .btn {
-                background-color: white;
-                width: 156px;
-                padding: 17px 16px;
-                font-size: 1rem;
-                font-weight: 400;
-                color: $black;
-                border: none;
-                line-height: 0px;
-            }
-        }
+    .input-group-text {
+      background-color: transparent;
+      border: none;
+      position: relative;
+      top: 5px;
     }
+  }
 
-    .count {
-        p {
-            @include font-sec;
-            font-size: 1.313rem;
-        }
+  .dropdown-menu {
+    border: none;
+    width: 156px;
+    height: 215px;
+    border-top-right-radius: 0px;
+    border-top-left-radius: 0px;
+    font-size: 0.875rem;
+    font-weight: 400;
+    color: $black;
+    padding: 16px 0px 16px;
+    overflow: auto;
+  }
+
+  .input-group {
+    width: 124px;
+    border-radius: 2px;
+    border: solid 1px $light-grey;
+  }
+
+  .form-control {
+    border: none;
+  }
+
+  .dropdown-item:hover {
+    background-color: $main;
+  }
+
+  .btn {
+    display: flex;
+    justify-content: space-between;
+    background-color: white;
+    width: 160px;
+    padding: 17px 16px;
+    font-size: 1rem;
+    font-weight: 500;
+    color: $black;
+    border: none;
+    line-height: 0px;
+  }
+
+  .btn-check:checked+.btn, .btn.active, .btn.show, .btn:first-child:active, :not(.btn-check)+.btn:active, .btn:hover {
+    color: $black;
+    background-color: white;
     }
 }
 
+.dropdown-menu .show {
+    inset: -5px auto auto 0px;
+}
+
+.count {
+  @include font-sec;
+  font-size: 1.313rem;
+}
+
 .cards {
-    margin-top: 55px;
-    font-size: 0.875rem;
-    gap: 49px;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
+  margin-top: 55px;
+  font-size: 0.875rem;
+  gap: 48px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
 
-    .card {
-        border: none;
-        text-decoration: none;
-        margin-bottom: 66px;
-        height: 45.688rem;
+  .card {
+    border: none;
+    text-decoration: none;
+    margin-bottom: 66px;
+    height: 45.688rem;
 
-        &-body {
-            padding: 32px 25px;
-        }
-        
-        img {
-            object-fit: cover;
-        }
-
-        h2 {
-            @include font-sec;
-            font-size: 1.125rem;
-            margin-bottom: 29px;
-        }
-
-        h3 {
-            font-weight: 500;
-            font-size: 0.75rem;
-            color: $grey;
-            margin-bottom: 15px;
-        }
-
-        &-text {
-            margin-bottom: 32px;
-            overflow: hidden;
-            max-height: 6em;
-        }
-
-        &-ingredients {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 0px;
-
-            &-details {
-                gap: 0px;
-            }
-        }
-
-        &-text-ingredient {
-            margin-bottom: 0px;
-        }
-
-        &-text-qty {
-            color: $grey;
-            margin-bottom: 21px;
-        }
+    &-body {
+      padding: 32px 25px;
     }
+
+    img {
+      object-fit: cover;
+    }
+
+    h2 {
+      @include font-sec;
+      font-size: 1.125rem;
+      margin-bottom: 29px;
+    }
+
+    h3 {
+      font-weight: 500;
+      font-size: 0.75rem;
+      color: $grey;
+      margin-bottom: 15px;
+    }
+
+    &-text {
+      margin-bottom: 32px;
+      overflow: hidden;
+      max-height: 6em;
+    }
+
+    &-ingredients {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0px;
+
+      &-details {
+        gap: 0px;
+      }
+    }
+
+    &-text-ingredient {
+      margin-bottom: 0px;
+    }
+
+    &-text-qty {
+      color: $grey;
+      margin-bottom: 21px;
+    }
+  }
 }
