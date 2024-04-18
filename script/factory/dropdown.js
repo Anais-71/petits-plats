@@ -1,12 +1,21 @@
 class ListItemFactory {
+  /**
+   * Creates a list item (<li>) with the specified text.
+   * @param {string} text - The text to display in the list item.
+   * @returns {HTMLLIElement} - The created list item.
+   */
   createListItem(text) {
     const li = document.createElement('li');
-    li.textContent = text;
+    li.textContent = text.charAt(0).toUpperCase() + text.slice(1); // Capitalize the first letter
     li.classList.add('dropdown-item');
     return li;
   }
 }
 
+/**
+ * Populates HTML dropdowns with data retrieved from a JSON endpoint.
+ * @param {string} jsonEndpoint - The URL of the JSON endpoint to retrieve data from.
+ */
 async function populateDropdowns(jsonEndpoint) {
   const dropdowns = {
     ingredients: document.querySelector('.dropdown-ingredients ul'),
@@ -20,35 +29,39 @@ async function populateDropdowns(jsonEndpoint) {
     const response = await fetch(jsonEndpoint);
     const data = await response.json();
 
-    // Vérifiez si le tableau recipes existe dans votre objet JSON
+    // Check if the recipes array exists in your JSON object
     if (data.recipe && Array.isArray(data.recipe)) {
-      // Liste globale de chaque catégorie
-      const allIngredients = {};
-      const allAppareils = {};
-      const allUstensiles = {};
+      const uniqueIngredients = new Set();
+      const uniqueAppareils = new Set();
+      const uniqueUstensiles = new Set();
 
-      // Parcourir toutes les recettes pour extraire les ingrédients, appareils et ustensiles
+      // Helper function to normalize words and remove common suffixes
+      const normalizeWord = word => {
+        return word.toLowerCase().replace(/s$/, ''); // Remove "s" at the end
+      };
+
+      // Populate sets with unique values
       data.recipe.forEach(recipe => {
         recipe.ingredients.forEach(ingredient => {
-          const normalizedIngredient = normalizeString(ingredient.ingredient);
-          allIngredients[normalizedIngredient] = true;
+          const normalizedIngredient = normalizeWord(ingredient.ingredient);
+          uniqueIngredients.add(normalizedIngredient);
         });
         
-        const normalizedAppareil = normalizeString(recipe.appliance);
-        allAppareils[normalizedAppareil] = true;
+        const normalizedAppareil = normalizeWord(recipe.appliance);
+        uniqueAppareils.add(normalizedAppareil);
 
         recipe.ustensils.forEach(ustensil => {
-          const normalizedUstensil = normalizeString(ustensil);
-          allUstensiles[normalizedUstensil] = true;
+          const normalizedUstensil = normalizeWord(ustensil);
+          uniqueUstensiles.add(normalizedUstensil);
         });
       });
 
-      // Convertir les clés des objets en tableaux et trier les listes par ordre alphabétique
-      const sortedIngredients = Object.keys(allIngredients).sort();
-      const sortedAppareils = Object.keys(allAppareils).sort();
-      const sortedUstensiles = Object.keys(allUstensiles).sort();
+      // Convert sets to arrays and sort them alphabetically
+      const sortedIngredients = Array.from(uniqueIngredients).sort();
+      const sortedAppareils = Array.from(uniqueAppareils).sort();
+      const sortedUstensiles = Array.from(uniqueUstensiles).sort();
 
-      // Peupler les dropdowns avec les données triées
+      // Populate dropdowns with sorted data
       sortedIngredients.forEach(item => {
         const li = factory.createListItem(item);
         dropdowns.ingredients.appendChild(li);
@@ -64,17 +77,12 @@ async function populateDropdowns(jsonEndpoint) {
         dropdowns.ustensiles.appendChild(li);
       });
     } else {
-      console.error('Le tableau "recipe" est manquant dans le fichier JSON.');
+      console.error('The "recipe" array is missing in the JSON file.');
     }
   } catch (error) {
-    console.error('Erreur lors de la récupération des données:', error);
+    console.error('Error fetching data:', error);
   }
 }
 
-// Normaliser une chaîne en convertissant en minuscules et en supprimant les espaces inutiles
-function normalizeString(str) {
-  return str.trim().toLowerCase();
-}
-
-// Appel de la fonction pour peupler les dropdowns avec les données du JSON
-populateDropdowns('../data/recipes.json');
+// Call the function to populate dropdowns with JSON data
+populateDropdowns('././data/recipes.json');

@@ -1,7 +1,7 @@
 import { recipeTemplate } from './templates/recipe.js';
 
 async function getRecipe() {
-    const response = await fetch('../data/recipes.json');
+    const response = await fetch('././data/recipes.json');
     const recipe = await response.json();
     return recipe;
 }
