@@ -61,23 +61,23 @@ export async function populateDropdowns(recipes) {
     const sortedAppareils = Array.from(uniqueAppareils).sort();
     const sortedUstensiles = Array.from(uniqueUstensiles).sort();
 
-    sortedIngredients.forEach(item => {
+    dropdowns.ingredients.append(...sortedIngredients.map(item => {
       const li = factory.createListItem(item);
       li.addEventListener('click', filter);
-      dropdowns.ingredients.appendChild(li);
-    });
+      return li;
+    }));
 
-    sortedAppareils.forEach(item => {
+    dropdowns.appareils.append(...sortedAppareils.map(item => {
       const li = factory.createListItem(item);
       li.addEventListener('click', filter);
-      dropdowns.appareils.appendChild(li);
-    });
+      return li;
+    }));
 
-    sortedUstensiles.forEach(item => {
+    dropdowns.ustensiles.append(...sortedUstensiles.map(item => {
       const li = factory.createListItem(item);
       li.addEventListener('click', filter);
-      dropdowns.ustensiles.appendChild(li);
-    });
+      return li;
+    }));
 
   } catch (error) {
     console.error('Error fetching data:', error);
