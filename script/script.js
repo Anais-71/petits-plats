@@ -1,16 +1,16 @@
 /**
- * Import the recipe template and dropdown population functions.
+ * Imports the recipe template and dropdown population functions.
  */
 import { recipeTemplate } from './templates/recipe.js';
 import { populateDropdowns } from './factory/dropdown.js';
 
 /**
- * Select the section of the document where the recipes will be displayed.
+ * Selects the section of the document where the recipes will be displayed.
  */
 const recipeSection = document.querySelector(".cards");
 
 /**
- * Fetch the recipe data from a JSON file.
+ * Fetches the recipe data from a JSON file.
  * @async
  * @function
  * @returns {Promise<Array>} A promise that resolves with an array of recipes.
@@ -23,7 +23,7 @@ export async function getRecipe() {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
         const data = await response.json();
-        return data.recipe; // Return the array of recipes
+        return data.recipe; // Returns the array of recipes
     } catch (error) {
         console.log('There was a problem with the fetch operation: ' + error.message);
     }
@@ -35,45 +35,45 @@ export async function getRecipe() {
 let searchText = '';
 
 /**
- * Select the button and input elements from the document.
+ * Selects the button and input elements from the document.
  */
 const button = document.querySelector('.input-group-text');
 const input = document.querySelector('.form-control');
 
 /**
- * Display the recipe data in the document.
+ * Displays the recipe data in the document.
  * @async
  * @function
  * @param {Array} recipes - The array of recipes to display.
  */
 export async function displayData(recipes) {
-    // Clear the recipe section
+    // Clears the recipe section
     recipeSection.innerHTML = '';
 
     recipes.forEach((recipe) => {
-        // DOM elements creation
+        // Creates DOM elements
         const recipeModel = recipeTemplate(recipe);
         const userCardDOM = recipeModel.getRecipeDOM();
         recipeSection.appendChild(userCardDOM);
     });
 
-    // Update the dropdowns
+    // Updates the dropdowns
     populateDropdowns(recipes);
 
     recipesCount()
 }
 
 /**
- * Initialize the application.
+ * Initializes the application.
  * @async
  * @function
  */
 async function init() {
-    // Recipe data recovery 
+    // Recovers recipe data 
     const data = await getRecipe();
     displayData(data);
 
-    // Get DOM elements after they have been created
+    // Gets DOM elements after they have been created
     const ing = document.querySelectorAll(".card-text-ingredient");
     const appliance = document.querySelectorAll(".appliance");
     const ustensil = document.querySelectorAll(".ustensil");
@@ -83,7 +83,7 @@ async function init() {
 
     for (let i = 0; i < lists.length; i++) {
         for (let j = 0; j < lists[i].length; j++) {
-            lists[i][j].addEventListener('click', filter); // Add event listener to each item of the lists
+            lists[i][j].addEventListener('click', filter); // Adds event listener to each item of the lists
         }
     }
 }
@@ -91,21 +91,21 @@ async function init() {
 init();
 
 /**
- * Filter the recipes based on the user's search text.
+ * Filters the recipes based on the user's search text.
  * @async
  * @function
  * @param {Event} event - The event that triggered the filter function.
  */
 export async function filter(event) {
     const clicked = event.target.innerHTML.toLowerCase();
-    // Clean previous cards
+    // Cleans previous cards
     const recipeSection = document.querySelector(".cards");
     recipeSection.innerHTML = '';
 
-    // Recipe data recovery 
+    // Recovers recipe data 
     const recipes = await getRecipe();
 
-    // Filter the recipes
+    // Filters the recipes
     let filteredRecipes = recipes.filter(recipe => {
         return ((recipe.ingredients.map(ingredient => ingredient.ingredient.toLowerCase()).includes(clicked) || 
             recipe.appliance.toLowerCase() === clicked || 
@@ -119,14 +119,14 @@ export async function filter(event) {
             recipe.description.toLowerCase().includes(searchText)));
     });
 
-    // Display the filtered recipes
+    // Displays the filtered recipes
     displayData(filteredRecipes);
 }
 
-// Add an event listener to the button element
+// Adds an event listener to the button element
 button.addEventListener('click', search);
 
-// Add an event listener to the input element for the 'Enter' key
+// Adds an event listener to the input element for the 'Enter' key
 input.addEventListener('keydown', function(event) {
     if (event.key === 'Enter') {
         search();
@@ -140,16 +140,16 @@ input.addEventListener('keydown', function(event) {
 function search() {
     searchText = input.value.toLowerCase();
 
-    // Check if the input text has at least 3 characters
+    // Checks if the input text has at least 3 characters
     if (searchText.length >= 3) {
-        // Create a fake event with the search text
+        // Creates a fake event with the search text
         const event = {
             target: {
                 innerHTML: searchText
             }
         };
 
-        // Call the filter function with the fake event
+        // Calls the filter function with the fake event
         filter(event);
     } else {
         // If the input text has less than 3 characters, show all recipes
@@ -163,7 +163,7 @@ function search() {
 function recipesCount() {
     var recipes = document.querySelectorAll(".card");
     var countElement = document.getElementById("count");
-    countElement.textContent = recipes.length + " recettes";
+    countElement.textContent = recipes.length + " recipes";
 }
 
 /**
