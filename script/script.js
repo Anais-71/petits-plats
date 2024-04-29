@@ -111,16 +111,14 @@ export async function filter(event) {
     for (let i = 0; i < recipes.length; i++) {
         const recipe = recipes[i];
         if ((recipe.ingredients.map(ingredient => ingredient.ingredient.toLowerCase()).includes(clicked) || 
-            recipe.appliance.toLowerCase() === clicked || 
-            recipe.ustensils.map(ustensil => ustensil.toLowerCase()).includes(clicked) ||
+            recipe.appliance.toLowerCase() === clicked || recipe.ustensils.map(ustensil => ustensil.toLowerCase()).includes(clicked) ||
             recipe.name.toLowerCase().includes(clicked) ||
             recipe.description.toLowerCase().includes(clicked)) &&
-            (recipe.ingredients.map(ingredient => ingredient.ingredient.toLowerCase()).includes(searchText) || 
-            recipe.appliance.toLowerCase() === searchText || 
-            recipe.ustensils.map(ustensil => ustensil.toLowerCase()).includes(searchText) ||
-            recipe.name.toLowerCase().includes(searchText) ||
-            recipe.description.toLowerCase().includes(searchText))) {
-            // Add the recipe to the array of filtered recipes
+            (recipe.ingredients.map(ingredient => ingredient.ingredient.toLowerCase()).includes(searchText.toLowerCase()) ||
+            recipe.appliance.toLowerCase().includes(searchText.toLowerCase()) ||
+            recipe.ustensils.map(ustensil => ustensil.toLowerCase()).includes(searchText.toLowerCase()) ||
+            recipe.name.toLowerCase().includes(searchText.toLowerCase()) ||
+            recipe.description.toLowerCase().includes(searchText.toLowerCase()))) {
             filteredRecipes.push(recipe);
         }
     }
@@ -129,52 +127,10 @@ export async function filter(event) {
     displayData(filteredRecipes);
 }
 
-// Add an event listener to the button element
-button.addEventListener('click', search);
-
-// Add an event listener to the input element for the 'Enter' key
-input.addEventListener('keydown', function(event) {
-    if (event.key === 'Enter') {
-        search();
-    }
-});
-
 /**
- * Calls the filter function with the fake event if the search text has at least 3 characters.
- * If the search text has less than 3 characters, it shows all recipes.
- */
-function search() {
-    searchText = input.value.toLowerCase();
-
-    // Check if the input text has at least 3 characters
-    if (searchText.length >= 3) {
-        // Create a fake event with the search text
-        const event = {
-            target: {
-                innerHTML: searchText
-            }
-        };
-
-        // Call the filter function with the fake event
-        filter(event);
-    } else {
-        // If the input text has less than 3 characters, show all recipes
-        init();
-    }
-}
-
-/**
- * Counts the number of recipes and displays the count in the DOM.
+ * Count the number of recipes and display it in the header.
  */
 function recipesCount() {
-    var recipes = document.querySelectorAll(".card");
-    var countElement = document.getElementById("count");
-    countElement.textContent = recipes.length + " recettes";
+    const recipesCount = document.querySelector('.count');
+    recipesCount.innerHTML = `<span>${recipeSection.children.length}</span> recettes`;
 }
-
-/**
- * Resets the search bar when the close button is clicked.
- */
-document.querySelector(".close").addEventListener('click', function() {
-    document.querySelector(".form-control").value = '';
-});

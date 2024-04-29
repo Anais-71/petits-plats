@@ -1,5 +1,4 @@
-import { filter } from "../script.js";
-import { getRecipe } from "../script.js";
+import { filter,getRecipe } from "../script.js";
 
 /**
  * Class representing a factory for creating list items.
@@ -91,3 +90,62 @@ export async function populateDropdowns(recipes) {
   const recipes = await getRecipe();
   populateDropdowns(recipes);
 })();
+
+//Type search function inside each list
+// Add event listeners to buttons
+let searchIngredient = document.querySelector(".dropdown-ingredients-search");
+const btnIngredient = document.querySelector(".search-ingredient");
+btnIngredient.addEventListener('click', ingredientSearch);
+let searchAppliance = document.querySelector(".dropdown-appliances-search");
+const btnAppliance = document.querySelector(".search-appliance");
+btnAppliance.addEventListener('click', applianceSearch);
+let searchUstensil = document.querySelector(".dropdown-ustensils-search");
+const btnUstensil = document.querySelector(".search-ustensil");
+btnUstensil.addEventListener('click', ustensilSearch);
+
+// Add event listeners to input elements for the 'Enter' key
+searchIngredient.addEventListener('keydown', function(event) {
+  if (event.key === 'Enter') {
+      ingredientSearch(searchIngredient.value, event);
+  }
+});
+searchAppliance.addEventListener('keydown', function(event) {
+if (event.key === 'Enter') {
+    applianceSearch(searchAppliance.value);
+}
+});
+searchUstensil.addEventListener('keydown', function(event) {
+if (event.key === 'Enter') {
+    ustensilSearch(searchUstensil.value);
+}
+});
+
+function ingredientSearch(searchTerm, event) {
+  const listItems = document.querySelectorAll('.dropdown-ingredients li');
+  for (let i = 0; i < listItems.length; i++) {
+    if (listItems[i].textContent === searchTerm) {
+      listItems[i].click();
+      break;
+    }
+  }
+}
+
+function applianceSearch(searchTerm) {
+  const listItems = document.querySelectorAll('.dropdown-appareils li');
+  for (let i = 0; i < listItems.length; i++) {
+    if (listItems[i].textContent === searchTerm) {
+      listItems[i].click();
+      break;
+    }
+  }
+}
+
+function ustensilSearch(searchTerm) {
+  const listItems = document.querySelectorAll('.dropdown-ustensiles li');
+  for (let i = 0; i < listItems.length; i++) {
+    if (listItems[i].textContent === searchTerm) {
+      listItems[i].click();
+      break;
+    }
+  }
+}
