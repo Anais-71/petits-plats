@@ -91,3 +91,73 @@ export async function populateDropdowns(recipes) {
   const recipes = await getRecipe();
   populateDropdowns(recipes);
 })();
+
+//Type search function inside each list
+// Add event listeners to buttons
+let searchIngredient = document.querySelector(".dropdown-ingredients-search");
+const btnIngredient = document.querySelector(".search-ingredient");
+btnIngredient.addEventListener('click', ingredientSearch);
+let searchAppliance = document.querySelector(".dropdown-appliances-search");
+const btnAppliance = document.querySelector(".search-appliance");
+btnAppliance.addEventListener('click', applianceSearch);
+let searchUstensil = document.querySelector(".dropdown-ustensils-search");
+const btnUstensil = document.querySelector(".search-ustensil");
+btnUstensil.addEventListener('click', ustensilSearch);
+
+// Add event listeners to input elements for the 'Enter' key
+searchIngredient.addEventListener('keydown', function(event) {
+  if (event.key === 'Enter') {
+      ingredientSearch(searchIngredient.value, event);
+  }
+});
+searchAppliance.addEventListener('keydown', function(event) {
+if (event.key === 'Enter') {
+    applianceSearch(searchAppliance.value);
+}
+});
+searchUstensil.addEventListener('keydown', function(event) {
+if (event.key === 'Enter') {
+    ustensilSearch(searchUstensil.value);
+}
+});
+
+//Tables to store sected elements
+let selectedIngredients = [];
+let selectedAppliances = [];
+let selectedUstensils = [];
+
+function ingredientSearch(searchTerm) {
+  if (searchTerm.length >= 3) {
+    const listItems = Array.from(document.querySelectorAll('.dropdown-ingredients li'));
+    const listItem = listItems.find(item => item.textContent.includes(searchTerm));
+    if (listItem && !selectedIngredients.includes(listItem.textContent)) {
+      selectedIngredients.push(listItem.textContent);
+      listItem.classList.add('selected');
+      listItem.click();
+    }
+  }
+}
+
+function applianceSearch(searchTerm) {
+  if (searchTerm.length >= 3) {
+    const listItems = Array.from(document.querySelectorAll('.dropdown-appareils li'));
+    const listItem = listItems.find(item => item.textContent.includes(searchTerm));
+    if (listItem && !selectedAppliances.includes(listItem.textContent)) {
+      selectedAppliances.push(listItem.textContent);
+      listItem.classList.add('selected');
+      listItem.click();
+    }
+  }
+}
+
+function ustensilSearch(searchTerm) {
+  if (searchTerm.length >= 3) {
+    const listItems = Array.from(document.querySelectorAll('.dropdown-ustensiles li'));
+    const listItem = listItems.find(item => item.textContent.includes(searchTerm));
+    if (listItem && !selectedUstensils.includes(listItem.textContent)) {
+      selectedUstensils.push(listItem.textContent);
+      listItem.classList.add('selected'); 
+      listItem.click();
+    }
+  }
+}
