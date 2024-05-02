@@ -1,5 +1,5 @@
 export function recipeTemplate(data) {
-    const { body, title, recipe, txt, ingredients, divIngredients, divDetails, image, name, description, } = data;
+    const { body, time, title, recipe, txt, ingredients, divIngredients, divDetails, image, name, description, } = data;
 
     const picture = `assets/img/${image}`;
 
@@ -20,6 +20,10 @@ export function recipeTemplate(data) {
         pictureElement.setAttribute('src', picture);
         pictureElement.setAttribute('alt', 'Illustration de la recette');
         pictureElement.setAttribute('style', 'height: 15.813rem');
+
+        const timeElement = document.createElement('p');
+        timeElement.classList.add('card-time');
+        timeElement.textContent = time + 'min';
     
         const bodyElement = document.createElement('div');
         bodyElement.classList.add('card-body');
@@ -70,9 +74,10 @@ export function recipeTemplate(data) {
     
         card.appendChild(pictureElement);
         card.appendChild(bodyElement);
+        card.appendChild(timeElement);
     
         return card;
     }      
 
-    return { picture, body, title, recipe, txt, ingredients, divIngredients, divDetails, getRecipeDOM };
+    return { picture, time, body, title, recipe, txt, ingredients, divIngredients, divDetails, getRecipeDOM };
 }

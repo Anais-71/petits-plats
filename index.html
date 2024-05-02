@@ -34,14 +34,18 @@
             DÉLICIEUSES</h1>
 
         <div class="input-group mb-3 mx-auto">
-            <input type="text" class="form-control" placeholder="Rechercher une recette, un ingrédient..."
+            <svg class="close" xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 17 17"
+                fill="none">
+                <path d="M15 15L8.5 8.5M8.5 8.5L2 2M8.5 8.5L15 2M8.5 8.5L2 15" stroke="#7A7A7A" stroke-width="2.16667"
+                    stroke-linecap="round" stroke-linejoin="round"></path>
+            </svg><input type="text" class="form-control" placeholder="Rechercher une recette, un ingrédient..."
                 aria-label="Rechercher" aria-describedby="basic-addon2">
             <div class="input-group-append">
                 <span class="input-group-text" id="basic-addon2">
                     <svg width="28" height="29" viewBox="0 0 28 29" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <circle cx="10" cy="10.4219" r="9.5" stroke="white"></circle>
                         <line x1="18.3536" y1="19.0683" x2="27.3536" y2="28.0683" stroke="white"></line>
-                        </svg>                        
+                    </svg>
                 </span>
             </div>
         </div>
@@ -52,61 +56,82 @@
             <div class="dropdown-section">
 
                 <div class="dropdown dropdown-ingredients">
-                    <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                      Ingrédients
+                    <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        Ingrédients
                     </button>
-                    <ul class="dropdown-menu">
-                        <li><div class="input-group mb-3 mx-auto">
-                            <input type="text" class="form-control" aria-label="Rechercher" aria-describedby="basic-addon2">
-                            <div class="input-group-append">
+                    <div class="dropdown-menu">
+                        <div class="input-group mb-3 mx-auto">
+                            <input type="text" class="form-control dropdown-ingredients-search" aria-label="Rechercher"
+                                aria-describedby="basic-addon2">
+                            <div class="input-group-append search-ingredient">
                                 <span class="input-group-text" id="basic-addon2">
-                                    <svg width="13.5" height="14" viewBox="0 0 28 29" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <svg width="13.5" height="14" viewBox="0 0 28 29" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
                                         <circle cx="10" cy="10.4219" r="9.5" stroke="#7A7A7A"></circle>
-                                        <line x1="18.3536" y1="19.0683" x2="27.3536" y2="28.0683" stroke="#7A7A7A"></line>
-                                        </svg>                                        
+                                        <line x1="18.3536" y1="19.0683" x2="27.3536" y2="28.0683" stroke="#7A7A7A">
+                                        </line>
+                                    </svg>
                                 </span>
                             </div>
-                        </div></li>
-                    </ul>
-                  </div>
-
-                  <div class="dropdown dropdown-appareils">
-                    <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                      Appareils
-                    </button>
-                    <ul class="dropdown-menu">
-                        <li><div class="input-group mb-3 mx-auto">
-                            <input type="text" class="form-control" aria-label="Rechercher" aria-describedby="basic-addon2">
-                            <div class="input-group-append">
-                                <span class="input-group-text" id="basic-addon2">
-                                    <svg width="13.5" height="14" viewBox="0 0 28 29" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <circle cx="10" cy="10.4219" r="9.5" stroke="#7A7A7A"></circle>
-                                        <line x1="18.3536" y1="19.0683" x2="27.3536" y2="28.0683" stroke="#7A7A7A"></line>
-                                        </svg>                                        
-                                </span>
-                            </div>
-                        </div></li>
-                    </ul>
-                  </div>
-
-                  <div class="dropdown dropdown-ustensiles">
-                    <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                      Ustensiles
-                    </button>
-                    <ul class="dropdown-menu">
-                    <li><div class="input-group mb-3 mx-auto">
-                        <input type="text" class="form-control" aria-label="Rechercher" aria-describedby="basic-addon2">
-                        <div class="input-group-append">
-                            <span class="input-group-text" id="basic-addon2">
-                                <svg width="13.5" height="14" viewBox="0 0 28 29" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <circle cx="10" cy="10.4219" r="9.5" stroke="#7A7A7A"></circle>
-                                    <line x1="18.3536" y1="19.0683" x2="27.3536" y2="28.0683" stroke="#7A7A7A"></line>
-                                    </svg>                                        
-                            </span>
                         </div>
-                    </div></li>
-                    </ul>
-                  </div>
+                        <ul>
+                            <li></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="dropdown dropdown-appareils">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        Appareils
+                    </button>
+                    <div class="dropdown-menu">
+                        <div class="input-group mb-3 mx-auto">
+                            <input type="text" class="form-control dropdown-appliances-search" aria-label="Rechercher"
+                                aria-describedby="basic-addon2">
+                            <div class="input-group-append">
+                                <span class="input-group-text search-appliance" id="basic-addon2">
+                                    <svg width="13.5" height="14" viewBox="0 0 28 29" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <circle cx="10" cy="10.4219" r="9.5" stroke="#7A7A7A"></circle>
+                                        <line x1="18.3536" y1="19.0683" x2="27.3536" y2="28.0683" stroke="#7A7A7A">
+                                        </line>
+                                    </svg>
+                                </span>
+                            </div>
+                        </div>
+                        <ul>
+                            <li></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="dropdown dropdown-ustensiles">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        Ustensiles
+                    </button>
+                    <div class="dropdown-menu">
+                        <div class="input-group mb-3 mx-auto">
+                            <input type="text" class="form-control dropdown-ustensils-search" aria-label="Rechercher"
+                                aria-describedby="basic-addon2">
+                            <div class="input-group-append">
+                                <span class="input-group-text search-ustensil" id="basic-addon2">
+                                    <svg width="13.5" height="14" viewBox="0 0 28 29" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <circle cx="10" cy="10.4219" r="9.5" stroke="#7A7A7A"></circle>
+                                        <line x1="18.3536" y1="19.0683" x2="27.3536" y2="28.0683" stroke="#7A7A7A">
+                                        </line>
+                                    </svg>
+                                </span>
+                            </div>
+                        </div>
+                        <ul>
+                            <li></li>
+                        </ul>
+                    </div>
+                </div>
             </div>
 
             <p class="count" id="count"></p>
@@ -122,9 +147,8 @@
     </footer>
     <!-- Bootstrap JS Bundle -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-        crossorigin="anonymous">
-    </script>
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
+        </script>
 
     <!-- JS -->
     <script type="module" src="./script/script.js"></script>
