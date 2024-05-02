@@ -35,12 +35,6 @@ export async function getRecipe() {
 let searchText = '';
 
 /**
- * Select the button and input elements from the document.
- */
-const button = document.querySelector('.input-group-text');
-const input = document.querySelector('.form-control');
-
-/**
  * Display the recipe data in the document.
  * @async
  * @function
