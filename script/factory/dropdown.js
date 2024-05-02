@@ -120,32 +120,52 @@ if (event.key === 'Enter') {
 }
 });
 
-function ingredientSearch(searchTerm, event) {
-  const listItems = document.querySelectorAll('.dropdown-ingredients li');
-  for (let i = 0; i < listItems.length; i++) {
-    if (listItems[i].textContent === searchTerm) {
-      listItems[i].click();
-      break;
+//Tables to store sected elements
+let selectedIngredients = [];
+let selectedAppliances = [];
+let selectedUstensils = [];
+
+function ingredientSearch(searchTerm) {
+  if (searchTerm.length >= 3) {
+    const listItems = Array.from(document.querySelectorAll('.dropdown-ingredients li'));
+    for (let i = 0; i < listItems.length; i++) {
+      const listItem = listItems[i];
+      if (listItem.textContent.includes(searchTerm) && !selectedIngredients.includes(listItem.textContent)) {
+        selectedIngredients.push(listItem.textContent);
+        listItem.classList.add('selected');
+        listItem.click();
+        break;
+      }
     }
   }
 }
 
 function applianceSearch(searchTerm) {
-  const listItems = document.querySelectorAll('.dropdown-appareils li');
-  for (let i = 0; i < listItems.length; i++) {
-    if (listItems[i].textContent === searchTerm) {
-      listItems[i].click();
-      break;
+  if (searchTerm.length >= 3) {
+    const listItems = Array.from(document.querySelectorAll('.dropdown-appareils li'));
+    for (let i = 0; i < listItems.length; i++) {
+      const listItem = listItems[i];
+      if (listItem.textContent.includes(searchTerm) && !selectedAppliances.includes(listItem.textContent)) {
+        selectedAppliances.push(listItem.textContent);
+        listItem.classList.add('selected');
+        listItem.click();
+        break;
+      }
     }
   }
 }
 
 function ustensilSearch(searchTerm) {
-  const listItems = document.querySelectorAll('.dropdown-ustensiles li');
-  for (let i = 0; i < listItems.length; i++) {
-    if (listItems[i].textContent === searchTerm) {
-      listItems[i].click();
-      break;
+  if (searchTerm.length >= 3) {
+    const listItems = Array.from(document.querySelectorAll('.dropdown-ustensiles li'));
+    for (let i = 0; i < listItems.length; i++) {
+      const listItem = listItems[i];
+      if (listItem.textContent.includes(searchTerm) && !selectedUstensils.includes(listItem.textContent)) {
+        selectedUstensils.push(listItem.textContent);
+        listItem.classList.add('selected');
+        listItem.click();
+        break;
+      }
     }
   }
 }

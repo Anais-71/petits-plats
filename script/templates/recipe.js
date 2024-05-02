@@ -85,13 +85,13 @@ export function recipeTemplate(data) {
 
         // Create appliance element
         const applianceElement = document.createElement('p');
-        applianceElement.textContent = appliance;
+        applianceElement.textContent = data.appliance;
         applianceElement.classList.add('appliance');
         applianceElement.style.display = "none"; //hidden for filter purpose
 
         // Create ustensil element
         const ustensilElement = document.createElement('p');
-        ustensilElement.textContent = ustensil;
+        ustensilElement.textContent = data.ustensil;
         ustensilElement.classList.add('ustensil');
         ustensilElement.style.display = "none"; //hidden for filter purpose
 
