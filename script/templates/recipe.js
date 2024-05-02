@@ -5,11 +5,7 @@
  * @returns {Object} An object containing the recipe's DOM elements and other details.
  */
 export function recipeTemplate(data) {
-<<<<<<< HEAD
-    const { body, title, recipe, txt, ingredients, appliance, ustensil, divIngredients, divDetails, image, name, description, } = data;
-=======
     const { body, time, title, recipe, txt, ingredients, divIngredients, divDetails, image, name, description, } = data;
->>>>>>> e9de7ee (style: adaptation of elements to the mockup)
 
     const picture = `assets/img/${image}`;
 
@@ -36,14 +32,10 @@ export function recipeTemplate(data) {
         pictureElement.setAttribute('alt', 'Recipe illustration');
         pictureElement.setAttribute('style', 'height: 15.813rem');
 
-<<<<<<< HEAD
-        // Create body element
-=======
         const timeElement = document.createElement('p');
         timeElement.classList.add('card-time');
         timeElement.textContent = time + 'min';
     
->>>>>>> e9de7ee (style: adaptation of elements to the mockup)
         const bodyElement = document.createElement('div');
         bodyElement.classList.add('card-body');
 
@@ -115,18 +107,10 @@ export function recipeTemplate(data) {
         // Append elements to card
         card.appendChild(pictureElement);
         card.appendChild(bodyElement);
-<<<<<<< HEAD
-
-        return card;
-    }
-
-    return { picture, body, title, recipe, txt, ingredients, appliance, ustensil, divIngredients, divDetails, getRecipeDOM };
-=======
         card.appendChild(timeElement);
     
         return card;
     }      
 
     return { picture, time, body, title, recipe, txt, ingredients, divIngredients, divDetails, getRecipeDOM };
->>>>>>> e9de7ee (style: adaptation of elements to the mockup)
 }
