@@ -61,7 +61,9 @@ header {
     }
 
     &-text {
-      background-color: $black;
+      background-color: #1B1B1B;
+      background-repeat: no-repeat;
+      background-size: cover;
       border-radius: 10px;
       width: 51px;
       height: 51px;
@@ -69,9 +71,22 @@ header {
       position: absolute;
       right: 3px;
       top: 3px;
-
-      
+      z-index: 10000;
+      cursor: pointer;    
     }
+
+    &-text:hover {
+      background-color: $main;
+      color: #1B1B1B;
+    }
+  }
+
+  .close {
+    z-index: 10000;
+    position: absolute;
+    top: 22px;
+    right: 62px;
+    display: none;
   }
 
   input::placeholder {
@@ -82,6 +97,9 @@ header {
 
   .form-control {
     border-radius: 11px !important;
+    &:focus .close {
+      display:block;
+    }
   }
 }
 
@@ -101,6 +119,7 @@ header {
       border: none;
       position: relative;
       top: 5px;
+      cursor: pointer;
     }
   }
 
@@ -115,6 +134,11 @@ header {
     color: $black;
     padding: 16px 0px 16px;
     overflow: auto;
+
+    ul {
+      list-style-type: none;
+      padding: 0px;
+    }
   }
 
   .input-group {
@@ -138,7 +162,6 @@ header {
     width: 160px;
     padding: 17px 16px;
     font-size: 1rem;
-    font-weight: 500;
     color: $black;
     border: none;
     line-height: 0px;
@@ -153,6 +176,19 @@ header {
 .dropdown-menu .show {
     inset: -5px auto auto 0px;
 }
+
+.selected {
+  background-color: $main;
+  font-weight: 700;
+
+::after {
+  content: "\f057"; 
+  font-family: "Font Awesome 5 Free";
+  display: inline-block;
+  padding-right: 14px; 
+}
+}
+
 
 .count {
   @include font-sec;
@@ -172,6 +208,19 @@ header {
     text-decoration: none;
     margin-bottom: 66px;
     height: 45.688rem;
+
+    &-time {
+      background-color: $main;
+      font-size: 0.75rem;
+      width: 67px;
+      height: 27px;
+      padding: 5px 15px;
+      border-radius: 21px;
+      box-shadow: 0px 4px 34px 30px rgba(0, 0, 0, 0.04);
+      position: absolute;
+      top: 21px;
+      right: 22px;
+    }
 
     &-body {
       padding: 32px 25px;
