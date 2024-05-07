@@ -137,6 +137,7 @@ header .form-control:focus .close {
   color: #1B1B1B;
   border: none;
   line-height: 0px;
+  border-radius: 10px;
 }
 .filter .btn-check:checked + .btn, .filter .btn.active, .filter .btn.show, .filter .btn:first-child:active, .filter :not(.btn-check) + .btn:active, .filter .btn:hover {
   color: #1B1B1B;
@@ -148,14 +149,26 @@ header .form-control:focus .close {
 }
 
 .selected {
+  display: flex;
   background-color: #FFD15B;
-  font-weight: 700;
+  width: 167px;
+  height: 38px;
+  padding: 17px 18px;
+  align-items: center;
+  gap: 60px;
+  border-radius: 10px;
+  margin-top: 21px;
+  min-width: 0;
+  white-space: nowrap;
+  overflow: hidden;
 }
-.selected ::after {
+.selected::after {
   content: "\f057";
   font-family: "Font Awesome 5 Free";
-  display: inline-block;
+  font-weight: 900;
   padding-right: 14px;
+  position: absolute;
+  right: 0px;
 }
 
 .count {
