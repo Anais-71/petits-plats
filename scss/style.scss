@@ -165,6 +165,7 @@ header {
     color: $black;
     border: none;
     line-height: 0px;
+    border-radius: 10px;
   }
 
   .btn-check:checked+.btn, .btn.active, .btn.show, .btn:first-child:active, :not(.btn-check)+.btn:active, .btn:hover {
@@ -178,15 +179,27 @@ header {
 }
 
 .selected {
-  background-color: $main;
-  font-weight: 700;
+  display: flex;
+  background-color: #FFD15B;
+  width: 167px;
+  height: 38px;
+  padding: 17px 18px;
+  align-items: center;
+  gap: 60px;
+  border-radius: 10px;
+  margin-top: 21px;
+  min-width: 0;
+  white-space: nowrap;
+  overflow: hidden;
 
-::after {
+&::after {
   content: "\f057"; 
   font-family: "Font Awesome 5 Free";
-  display: inline-block;
-  padding-right: 14px; 
-}
+  font-weight: 900;
+  padding-right: 14px;
+  position: absolute;
+  right: 0px;
+  }
 }
 
 

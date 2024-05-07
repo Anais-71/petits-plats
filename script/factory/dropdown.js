@@ -1,26 +1,30 @@
-import { filter } from "../script.js";
-import { getRecipe } from "../script.js";
+/**
+ * Imports the getRecipe and filter functions from the script.js file.
+ */
+import { getRecipe, filter, clickedItems } from "../script.js";
 
 /**
  * Class representing a factory for creating list items.
  */
 class ListItemFactory {
   /**
-   * Create a list item.
-   * @param {string} text - The text content of the list item.
-   * @return {HTMLElement} The created list item.
+   * Creates a list item with the given text.
+   * @param {string} text - The text to be displayed in the list item.
+   * @returns {HTMLElement} The created list item.
    */
   createListItem(text) {
     const li = document.createElement('li');
     li.textContent = text.charAt(0).toUpperCase() + text.slice(1);
-    li.classList.add('dropdown-item');
-    return li;
+    li.classList.add('dropdown-item'); return li;
   }
 }
 
 /**
- * Populate dropdowns with unique sorted ingredients, appliances, and utensils from recipes.
- * @param {Array} recipes - The recipes to extract data from.
+ * Populates the dropdowns with the recipe data.
+ * @async
+ * @function
+ * @param {Array} recipes - The recipe data.
+ * @throws Will throw an error if there is a problem fetching the data.
  */
 export async function populateDropdowns(recipes) {
   const dropdowns = {
@@ -30,13 +34,10 @@ export async function populateDropdowns(recipes) {
   };
 
   const factory = new ListItemFactory();
-
   try {
-    // Clear the dropdowns
     dropdowns.ingredients.innerHTML = '';
     dropdowns.appareils.innerHTML = '';
     dropdowns.ustensiles.innerHTML = '';
-
     const uniqueIngredients = new Set();
     const uniqueAppareils = new Set();
     const uniqueUstensiles = new Set();
@@ -47,117 +48,108 @@ export async function populateDropdowns(recipes) {
           uniqueIngredients.add(ingredient.ingredient.toLowerCase());
         });
       }
-      
       uniqueAppareils.add(recipe.appliance.toLowerCase());
-    
       if (recipe.ustensiles) {
         recipe.ustensiles.forEach(ustensil => {
           uniqueUstensiles.add(ustensil.toLowerCase());
         });
       }
-    });    
+    });
 
     const sortedIngredients = Array.from(uniqueIngredients).sort();
     const sortedAppareils = Array.from(uniqueAppareils).sort();
     const sortedUstensiles = Array.from(uniqueUstensiles).sort();
 
-    dropdowns.ingredients.append(...sortedIngredients.map(item => {
+    //Ingredients list
+    sortedIngredients.forEach(item => {
       const li = factory.createListItem(item);
-      li.addEventListener('click', filter);
-      return li;
-    }));
+      li.addEventListener('click', function (event) {
+        // Create new element
+        const newElement = document.createElement('div');
+        // Add .selected class to the new element
+        newElement.classList.add('selected');
+        // Add text to the new element
+        newElement.textContent = event.target.textContent;
+        // Add click event to remove the element when clicked
+        newElement.addEventListener('click', function () {
+          this.remove();
+          const index = clickedItems.indexOf(this.textContent.toLowerCase());
+          if (index > -1) {
+            clickedItems.splice(index, 1);
+          }
+          filter(event);
+        });
+        // Finds the right section and add the element
+        const filterSection = document.querySelector('.dropdown-ingredients');
+        filterSection.appendChild(newElement);
+        // Filter function 
+        filter(event);
+      });
+      dropdowns.ingredients.appendChild(li);
+    });
 
-    dropdowns.appareils.append(...sortedAppareils.map(item => {
+    //Appliances list
+    sortedAppareils.forEach(item => {
       const li = factory.createListItem(item);
-      li.addEventListener('click', filter);
-      return li;
-    }));
+      li.addEventListener('click', function (event) {
+        // Create new element
+        const newElement = document.createElement('div');
+        // Add .selected class to the new element
+        newElement.classList.add('selected');
+        // Add text to the new element
+        newElement.textContent = event.target.textContent;
+        // Add click event to remove the element when clicked
+        newElement.addEventListener('click', function () {
+          this.remove();
+          const index = clickedItems.indexOf(this.textContent.toLowerCase());
+          if (index > -1) {
+            clickedItems.splice(index, 1);
+          }
+          filter(event);
+        });
+        // Finds the right section and add the element
+        const filterSection = document.querySelector('.dropdown-appareils');
+        filterSection.appendChild(newElement);
+        // Filter function 
+        filter(event);
+      });
+      dropdowns.appareils.appendChild(li);
+    });
 
-    dropdowns.ustensiles.append(...sortedUstensiles.map(item => {
+    //Ustensils list
+    sortedUstensiles.forEach(item => {
       const li = factory.createListItem(item);
-      li.addEventListener('click', filter);
-      return li;
-    }));
+      li.addEventListener('click', function (event) {
+        // Create new element
+        const newElement = document.createElement('div');
+        // Add .selected class to the new element
+        newElement.classList.add('selected');
+        // Add text to the new element
+        newElement.textContent = event.target.textContent;
+        // Add click event to remove the element when clicked
+        newElement.addEventListener('click', function () {
+          this.remove();
+          const index = clickedItems.indexOf(this.textContent.toLowerCase());
+          if (index > -1) {
+            clickedItems.splice(index, 1);
+          }
+          filter(event);
+        });
+        // Finds the right section and add the element
+        const filterSection = document.querySelector('.dropdown-ustensiles');
+        filterSection.appendChild(newElement);
+        // Filter function 
+        filter(event);
+      });
+      dropdowns.ustensiles.appendChild(li);
+    });
 
   } catch (error) {
     console.error('Error fetching data:', error);
   }
 }
 
-/**
- * IIFE to populate dropdowns with recipes data.
- */
 (async () => {
   const recipes = await getRecipe();
   populateDropdowns(recipes);
 })();
-
-//Type search function inside each list
-// Add event listeners to buttons
-let searchIngredient = document.querySelector(".dropdown-ingredients-search");
-const btnIngredient = document.querySelector(".search-ingredient");
-btnIngredient.addEventListener('click', ingredientSearch);
-let searchAppliance = document.querySelector(".dropdown-appliances-search");
-const btnAppliance = document.querySelector(".search-appliance");
-btnAppliance.addEventListener('click', applianceSearch);
-let searchUstensil = document.querySelector(".dropdown-ustensils-search");
-const btnUstensil = document.querySelector(".search-ustensil");
-btnUstensil.addEventListener('click', ustensilSearch);
-
-// Add event listeners to input elements for the 'Enter' key
-searchIngredient.addEventListener('keydown', function(event) {
-  if (event.key === 'Enter') {
-      ingredientSearch(searchIngredient.value, event);
-  }
-});
-searchAppliance.addEventListener('keydown', function(event) {
-if (event.key === 'Enter') {
-    applianceSearch(searchAppliance.value);
-}
-});
-searchUstensil.addEventListener('keydown', function(event) {
-if (event.key === 'Enter') {
-    ustensilSearch(searchUstensil.value);
-}
-});
-
-//Tables to store sected elements
-let selectedIngredients = [];
-let selectedAppliances = [];
-let selectedUstensils = [];
-
-function ingredientSearch(searchTerm) {
-  if (searchTerm.length >= 3) {
-    const listItems = Array.from(document.querySelectorAll('.dropdown-ingredients li'));
-    const listItem = listItems.find(item => item.textContent.includes(searchTerm));
-    if (listItem && !selectedIngredients.includes(listItem.textContent)) {
-      selectedIngredients.push(listItem.textContent);
-      listItem.classList.add('selected');
-      listItem.click();
-    }
-  }
-}
-
-function applianceSearch(searchTerm) {
-  if (searchTerm.length >= 3) {
-    const listItems = Array.from(document.querySelectorAll('.dropdown-appareils li'));
-    const listItem = listItems.find(item => item.textContent.includes(searchTerm));
-    if (listItem && !selectedAppliances.includes(listItem.textContent)) {
-      selectedAppliances.push(listItem.textContent);
-      listItem.classList.add('selected');
-      listItem.click();
-    }
-  }
-}
-
-function ustensilSearch(searchTerm) {
-  if (searchTerm.length >= 3) {
-    const listItems = Array.from(document.querySelectorAll('.dropdown-ustensiles li'));
-    const listItem = listItems.find(item => item.textContent.includes(searchTerm));
-    if (listItem && !selectedUstensils.includes(listItem.textContent)) {
-      selectedUstensils.push(listItem.textContent);
-      listItem.classList.add('selected'); 
-      listItem.click();
-    }
-  }
-}
