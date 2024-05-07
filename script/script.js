@@ -1,21 +1,23 @@
+/**
+ * @module RecipeModule
+ */
 import { recipeTemplate } from "./templates/recipe.js";
 import { populateDropdowns } from "./factory/dropdown.js";
 import { searchText } from "./search_dropdown.js";
 
 /**
- * Selects the HTML element with class name "cards".
  * @type {HTMLElement}
+ * @description Selects the HTML element with class name "cards".
  */
 const recipeSection = document.querySelector(".cards");
 
 /**
- * Fetches the recipe data from a JSON file.
  * @async
- * @function
+ * @function getRecipe
+ * @description Fetches the recipe data from a JSON file.
  * @returns {Promise<Array>} A promise that resolves with the recipe data.
  * @throws Will throw an error if the fetch operation fails.
  */
-
 export async function getRecipe() {
     try {
         const response = await fetch('../data/recipes.json');
@@ -30,26 +32,27 @@ export async function getRecipe() {
 }
 
 /**
- * Displays the recipe data on the webpage.
  * @async
- * @function
+ * @function displayData
+ * @description Displays the recipe data on the webpage.
  * @param {Array} recipes - The recipe data to display.
  */
 async function displayData(recipes) {
     recipeSection.innerHTML = '';
-    recipes.forEach((recipe) => {
+    for (let i = 0; i < recipes.length; i++) {
+        const recipe = recipes[i];
         const recipeModel = recipeTemplate(recipe);
         const userCardDOM = recipeModel.getRecipeDOM();
         recipeSection.appendChild(userCardDOM);
-    });
+    }
     populateDropdowns(recipes); recipesCount()
 }
 
 /**
- * Initializes the webpage by fetching and displaying the recipe data,
- * and adding event listeners to the filter options.
  * @async
- * @function
+ * @function init
+ * @description Initializes the webpage by fetching and displaying the recipe data,
+ * and adding event listeners to the filter options.
  */
 async function init() {
     const data = await getRecipe();
@@ -68,8 +71,8 @@ async function init() {
 init();
 
 /**
- * Updates the count of recipes displayed on the webpage.
- * @function
+ * @function recipesCount
+ * @description Updates the count of recipes displayed on the webpage.
  */
 function recipesCount() {
     const recipesCount = document.querySelector('.count');
@@ -77,13 +80,17 @@ function recipesCount() {
 }
 
 /**
- * Filters the recipe data based on the user's selection and updates the webpage.
- * @async
- * @function
- * @param {Event} event - The event object.
+ * @type {Array}
+ * @description Stores the items clicked by the user for filtering.
  */
 export let clickedItems = [];
 
+/**
+ * @async
+ * @function filter
+ * @description Filters the recipe data based on the user's selection and updates the webpage.
+ * @param {Event} event - The event object.
+ */
 export async function filter(event) {
     const clicked = event.target.innerHTML.toLowerCase();
     clickedItems.push(clicked);
