@@ -54,6 +54,9 @@ async function displayData(recipes) {
 async function init() {
     const data = await getRecipe();
     displayData(data);
+    const searchBar = document.querySelector(".form-control");
+    searchBar.addEventListener('keyup', search);
+
     const ing = document.querySelectorAll(".card-text-ingredient");
     const appliance = document.querySelectorAll(".appliance");
     const ustensil = document.querySelectorAll(".ustensil");
@@ -100,10 +103,25 @@ export async function filter(event) {
             recipe.ustensils.map(ustensil => ustensil.toLowerCase()).includes(clickedItem) ||
             recipe.name.toLowerCase().includes(clickedItem) ||
             recipe.description.toLowerCase().includes(clickedItem)
-            );
+        );
 
         if (match) { filteredRecipes.push(recipe); }
     });
 
     displayData(filteredRecipes);
+}
+
+async function search(event) {
+    const searchText = event.target.value.toLowerCase();
+
+    const recipes = await getRecipe();
+
+    if (searchText.length < 3) {
+        // If the search text is less than 3 characters, display all recipes
+        displayData(recipes);
+    } else {
+        // If the search text is 3 characters or more, filter the recipes
+        let filteredRecipes = recipes.filter(recipe => recipe.name.toLowerCase().includes(searchText));
+        displayData(filteredRecipes);
+    }
 }
