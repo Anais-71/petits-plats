@@ -3,7 +3,6 @@
  */
 import { recipeTemplate } from "./templates/recipe.js";
 import { populateDropdowns } from "./factory/dropdown.js";
-import { searchText } from "./search_dropdown.js";
 
 /**
  * @type {HTMLElement}
@@ -57,6 +56,9 @@ async function displayData(recipes) {
 async function init() {
     const data = await getRecipe();
     displayData(data);
+    const searchBar = document.querySelector(".form-control");
+    searchBar.addEventListener('keyup', search);
+
     const ing = document.querySelectorAll(".card-text-ingredient");
     const appliance = document.querySelectorAll(".appliance");
     const ustensil = document.querySelectorAll(".ustensil");
@@ -119,4 +121,27 @@ export async function filter(event) {
     }
 
     displayData(filteredRecipes);
+}
+
+async function search(event) {
+    const searchText = event.target.value.toLowerCase();
+
+    if (searchText.length < 3) {
+        // If the search text is less than 3 characters, display all recipes
+        const recipes = await getRecipe();
+        displayData(recipes);
+    } else {
+        // If the search text is 3 characters or more, filter the recipes
+        const recipes = await getRecipe();
+        let filteredRecipes = [];
+
+        for (let i = 0; i < recipes.length; i++) {
+            const recipe = recipes[i];
+            if (recipe.name.toLowerCase().includes(searchText)) {
+                filteredRecipes.push(recipe);
+            }
+        }
+
+        displayData(filteredRecipes);
+    }
 }
